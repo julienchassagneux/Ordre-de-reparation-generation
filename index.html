@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Ordre de Réparation - Lycée Delambre - Montaigne</title>
+    <style>
+        /* === BASE & RESET AUTONOME (100% HORS-LIGNE POUR APK) === */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            padding: 10px;
+        }
+        .max-w-5xl {
+            max-width: 1024px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .bg-white { background-color: #ffffff; }
+        .bg-slate-50 { background-color: #f8fafc; }
+        .bg-slate-100 { background-color: #f1f5f9; }
+        .bg-slate-200 { background-color: #e2e8f0; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .bg-amber-100 { background-color: #fef3c7; }
+        .bg-amber-200 { background-color: #fde68a; }
+        .bg-red-100 { background-color: #fee2e2; }
+        .text-white { color: #ffffff; }
+        .text-slate-400 { color: #94a3b8; }
+        .text-slate-500 { color: #64748b; }
+        .text-slate-600 { color: #475569; }
+        .text-slate-700 { color: #334155; }
+        .text-slate-800 { color: #1e293b; }
+        .text-slate-900 { color: #0f172a; }
+        .text-blue-600 { color: #2563eb; }
+        .text-blue-900 { color: #1e3a8a; }
+        .text-amber-600 { color: #d97706; }
+        .text-amber-800 { color: #92400e; }
+        .text-amber-900 { color: #78350f; }
+        .text-red-600 { color: #dc2626; }
+        .text-red-800 { color: #991b1b; }
+        .text-emerald-700 { color: #047857; }
+        .bg-emerald-50 { background-color: #ecfdf5; }
+        .border-emerald-300 { border-color: #6ee7b7; }
+
+        .border { border: 1px solid #cbd5e1; }
+        .border-2 { border: 2px solid #0f172a; }
+        .border-slate-200 { border-color: #e2e8f0; }
+        .border-slate-300 { border-color: #cbd5e1; }
+        .border-slate-800 { border-color: #1e293b; }
+        .border-slate-900 { border-color: #0f172a; }
+        .border-amber-300 { border-color: #fcd34d; }
+        .border-amber-400 { border-color: #fbbf24; }
+        .border-amber-500 { border-color: #f59e0b; }
+        .border-red-300 { border-color: #fca5a5; }
+        .border-red-500 { border-color: #ef4444; }
+        .border-b { border-bottom: 1px solid #e2e8f0; }
+        .border-b-2 { border-bottom: 2px solid #1e293b; }
+        .border-t { border-top: 1px solid #cbd5e1; }
+        .border-r { border-right: 1px solid #cbd5e1; }
+
+        .rounded { border-radius: 6px; }
+        .rounded-lg { border-radius: 10px; }
+        .rounded-xl { border-radius: 14px; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-black { font-weight: 900; }
+        .uppercase { text-transform: uppercase; }
+        .italic { font-style: italic; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .leading-tight { line-height: 1.25; }
+        .leading-relaxed { line-height: 1.5; }
+
+        .flex { display: flex; }
+        .inline-flex { display: inline-flex; }
+        .flex-col { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .w-full { width: 100%; }
+        .block { display: block; }
+        .relative { position: relative; }
+
+        .print-mirror {
+            display: none;
+        }
+
+        /* === ERGONOMIE TACTILE MOBILE / TABLETTE (ÉCRAN UNIQUEMENT) === */
+        @media screen {
+            .top-bar {
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                margin-bottom: 12px;
+                padding: 12px;
+            }
+            .btn-action {
+                min-height: 44px;
+                padding: 10px 14px;
+                font-size: 14px;
+                font-weight: 600;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                transition: transform 0.1s, opacity 0.15s;
+            }
+            .btn-action:active {
+                transform: scale(0.97);
+            }
+            .btn-tool {
+                min-height: 40px;
+                padding: 8px 12px;
+                font-size: 13px;
+                font-weight: 700;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+            .print-container {
+                padding: 14px;
+            }
+            .header-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding-bottom: 14px;
+                margin-bottom: 14px;
+            }
+            @media (min-width: 768px) {
+                .header-grid {
+                    grid-template-columns: 4fr 5fr 3fr;
+                    align-items: center;
+                }
+            }
+            .two-col-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 14px;
+                margin-bottom: 14px;
+            }
+            @media (min-width: 768px) {
+                .two-col-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+            .client-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .vehicle-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            @media (min-width: 640px) {
+                .vehicle-grid {
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+            .col-span-2 { grid-column: span 2; }
+            .col-span-3 { grid-column: 1 / -1; }
+
+            .inspection-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            @media (min-width: 900px) {
+                .inspection-grid {
+                    grid-template-columns: 4fr 8fr;
+                }
+            }
+
+            .section-card {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            .section-title {
+                font-size: 14px;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            label {
+                font-size: 13px;
+                font-weight: 500;
+                margin-bottom: 3px;
+            }
+            /* 16px minimum pour empêcher le zoom automatique Android / iOS */
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="number"],
+            input[type="date"],
+            input[type="datetime-local"],
+            select,
+            textarea {
+                font-size: 16px !important;
+                padding: 9px 10px;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                background-color: #ffffff;
+                color: #0f172a;
+                width: 100%;
+                min-height: 42px;
+            }
+            input:focus, select:focus, textarea:focus {
+                outline: none;
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            }
+            input[type="radio"] {
+                width: 20px;
+                height: 20px;
+                accent-color: #2563eb;
+                vertical-align: middle;
+                margin-right: 4px;
+            }
+            .radio-label {
+                display: inline-flex;
+                align-items: center;
+                padding: 4px 8px;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .tires-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 14px;
+            }
+            .tires-table td {
+                border: 1px solid #cbd5e1;
+                padding: 8px 4px;
+            }
+            .wipers-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                padding: 8px;
+            }
+            .page-break {
+                height: 16px;
+                border-top: 2px dashed #cbd5e1;
+                margin: 18px 0;
+            }
+            .sig-canvas {
+                width: 100%;
+                height: 130px;
+            }
+            .cachet-text { font-size: 12px; }
+            .title-box h1 { font-size: 20px; margin: 0; }
+            .page-badge { font-size: 11px; }
+            .legal-text { font-size: 12px; }
+            .footer-text { font-size: 11px; margin-top: 10px; }
+            .legend-text { font-size: 12px; }
+            .housse-badge { font-size: 11px; padding: 3px 8px; }
+        }
+
+        /* === MISE EN PAGE IMPRESSION / PDF LISIBLE ET TEXTE EXTENSIBLE === */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 5mm 6mm;
+            }
+            html, body {
+                background: white !important;
+                color: black !important;
+                font-size: 10.5px !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print, .print-hidden {
+                display: none !important;
+            }
+            .print-container {
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                border: none !important;
+                display: block !important;
+                height: auto !important;
+                max-height: none !important;
+            }
+            .page-1, .page-2 {
+                display: block !important;
+                height: auto !important;
+                max-height: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .page-break {
+                display: none !important;
+                page-break-before: avoid !important;
+                break-before: avoid !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+            .header-grid {
+                display: grid !important;
+                grid-template-columns: 4fr 4.8fr 3.2fr !important;
+                gap: 8px !important;
+                padding-bottom: 6px !important;
+                margin-bottom: 6px !important;
+                align-items: center !important;
+            }
+            .two-col-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px !important;
+                margin-bottom: 6px !important;
+                align-items: stretch !important;
+            }
+            .client-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 4px 6px !important;
+            }
+            .vehicle-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr 1fr !important;
+                gap: 4px 6px !important;
+            }
+            .col-span-2 { grid-column: span 2 !important; }
+            .col-span-3 { grid-column: span 3 !important; }
+            .inspection-grid {
+                display: grid !important;
+                grid-template-columns: 4.3fr 7.7fr !important;
+                gap: 8px !important;
+            }
+            .inspection-left-col {
+                gap: 5px !important;
+            }
+            .fuel-int-box {
+                padding: 5px 6px !important;
+                gap: 4px !important;
+            }
+            .wipers-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 4px 6px !important;
+                padding: 5px 6px !important;
+            }
+            .section-card {
+                padding: 6px 8px !important;
+                margin-bottom: 6px !important;
+                border-radius: 6px !important;
+                break-inside: avoid !important;
+            }
+            .section-title {
+                font-size: 11px !important;
+                margin-bottom: 5px !important;
+                padding-bottom: 3px !important;
+            }
+            label {
+                font-size: 9.5px !important;
+                font-weight: 600 !important;
+                margin-bottom: 1px !important;
+                line-height: 1.15 !important;
+            }
+            input, select {
+                border: 1px solid #94a3b8 !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                font-size: 10.5px !important;
+                padding: 2.5px 5px !important;
+                min-height: auto !important;
+                border-radius: 3px !important;
+                line-height: 1.25 !important;
+                color: #0f172a !important;
+            }
+            /* Masquer les textarea figés et afficher les miroirs extensibles */
+            textarea {
+                display: none !important;
+            }
+            .print-mirror {
+                display: block !important;
+                width: 100% !important;
+                border: 1px solid #94a3b8 !important;
+                border-radius: 3px !important;
+                padding: 3px 5px !important;
+                font-size: 10.2px !important;
+                line-height: 1.28 !important;
+                color: #0f172a !important;
+                white-space: pre-wrap !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+                background-color: #ffffff !important;
+            }
+            .print-mirror.min-h-4 {
+                min-height: 64px !important;
+            }
+            .print-mirror.min-h-1 {
+                min-height: 30px !important;
+            }
+            input[type="radio"] {
+                appearance: auto !important;
+                -webkit-appearance: auto !important;
+                width: 11px !important;
+                height: 11px !important;
+                margin-right: 2px !important;
+            }
+            .radio-label {
+                border: none !important;
+                padding: 0 5px 0 0 !important;
+                font-size: 10px !important;
+                background: transparent !important;
+            }
+            .tires-table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 10px !important;
+            }
+            .tires-table td {
+                border: 1px solid #94a3b8 !important;
+                padding: 2.5px 4px !important;
+            }
+            .cachet-text { font-size: 10.5px !important; line-height: 1.25 !important; }
+            .title-box { padding: 6px 10px !important; }
+            .title-box h1 { font-size: 16.5px !important; }
+            .page-badge { font-size: 9.5px !important; margin-top: 2px !important; }
+            .housse-badge { font-size: 9.5px !important; padding: 2px 6px !important; }
+            .legal-box { padding: 5px 8px !important; margin-bottom: 6px !important; }
+            .legal-header { padding-bottom: 4px !important; margin-bottom: 4px !important; font-size: 10.5px !important; }
+            .legal-text { font-size: 9.2px !important; line-height: 1.25 !important; }
+            .footer-text { font-size: 9.5px !important; padding-top: 4px !important; margin-top: 2px !important; }
+            .legend-text { font-size: 9.5px !important; margin-top: 3px !important; }
+            .sig-canvas {
+                height: 56px !important;
+            }
+            #vehicleCanvas {
+                max-height: 180px !important;
+                width: auto !important;
+                max-width: 100% !important;
+            }
+        }
+
+        canvas {
+            touch-action: none;
+            display: block;
+        }
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Action Bar (hidden on print) -->
+    <div class="max-w-5xl bg-white rounded-xl shadow-md border border-slate-200 flex flex-wrap justify-between items-center top-bar no-print" style="gap: 10px;">
+        <div class="flex items-center" style="gap: 10px;">
+            <div class="bg-blue-600 text-white rounded-lg flex items-center justify-center" style="padding: 10px;">
+                <svg class="icon" style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div>
+                <div class="flex items-center flex-wrap" style="gap: 8px;">
+                    <h1 class="font-bold text-slate-900" style="font-size: 16px; margin: 0;">Ordre de Réparation Atelier</h1>
+                    <span id="saveIndicator" class="bg-emerald-50 text-emerald-700 border border-emerald-300 rounded font-medium" style="font-size: 11px; padding: 2px 7px;">Sauvegarde auto active</span>
+                </div>
+                <p class="text-slate-500" style="font-size: 12px; margin: 2px 0 0 0;">Lycée professionnel Delambre-Montaigne • Amiens</p>
+            </div>
+        </div>
+        <div class="flex items-center flex-wrap" style="gap: 8px;">
+            <button type="button" onclick="exportJSON()" class="btn-action bg-slate-100 text-slate-700 border border-slate-300" title="Enregistrer le dossier sur la tablette">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Sauver OR
+            </button>
+            <label class="btn-action bg-slate-100 text-slate-700 border border-slate-300" style="margin:0; cursor:pointer;" title="Ouvrir un dossier OR enregistré">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                Ouvrir OR
+                <input type="file" id="importJsonInput" accept=".json" onchange="importJSON(event)" style="display:none;">
+            </label>
+            <button type="button" onclick="clearAllFields()" class="btn-action bg-slate-100 text-slate-700 border border-slate-300">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Nouveau
+            </button>
+            <button type="button" onclick="exportWord()" class="btn-action text-white" style="background-color: #1d4ed8;" title="Télécharger l'Ordre de Réparation au format Word (.doc)">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Word (.doc)
+            </button>
+            <button type="button" onclick="triggerPrintPDF()" class="btn-action bg-blue-600 text-white">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                PDF / Imprimer
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Form Container -->
+    <div class="max-w-5xl bg-white rounded-xl shadow-lg border border-slate-200 print-container">
+        
+        <!-- ================= PAGE 1 ================= -->
+        <div class="page-1 flex flex-col justify-between">
+            <div>
+                <!-- HEADER SECTION COMPACT -->
+                <div class="header-grid border-b-2 border-slate-800">
+                    <!-- Cachet (Left) -->
+                    <div class="cachet-text leading-tight border-r border-slate-300" style="padding-right: 8px;">
+                        <div class="font-bold text-blue-900 uppercase">Lycée Delambre - Montaigne</div>
+                        <div class="text-slate-600 font-medium">Lycées professionnels publics</div>
+                        <div class="text-slate-600">3 rue Montaigne, 80080 AMIENS</div>
+                        <div class="text-slate-600">Tél : 03 22 66 30 60</div>
+                        <div class="text-slate-500 font-mono">SIRET: 19801700600018</div>
+                    </div>
+
+                    <!-- Title (Center) -->
+                    <div class="flex flex-col items-center justify-center text-center">
+                        <div class="border-2 border-slate-900 rounded bg-slate-50 w-full title-box" style="padding: 6px 12px;">
+                            <h1 class="font-black text-slate-900 tracking-wider">ORDRE DE RÉPARATION</h1>
+                            <span class="page-badge font-bold text-slate-500 uppercase tracking-widest block">Atelier Maintenance Véhicules</span>
+                        </div>
+                    </div>
+
+                    <!-- Date & Time (Right) -->
+                    <div class="bg-slate-50 rounded border border-slate-200" style="padding: 6px; display: flex; flex-direction: column; gap: 4px;">
+                        <div>
+                            <label class="block font-semibold text-slate-700">Réception :</label>
+                            <input type="datetime-local" id="dateReception" data-save="dateReception" class="w-full">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700">Livraison prévue :</label>
+                            <input type="datetime-local" id="dateLivraison" data-save="dateLivraison" class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLIENT & VEHICLE SECTIONS -->
+                <div class="two-col-grid">
+                    
+                    <!-- Client Information -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card">
+                        <h3 class="font-bold text-slate-800 uppercase tracking-wider flex items-center border-b border-slate-200 section-title" style="gap: 6px; margin-top: 0;">
+                            <svg class="icon text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Client
+                        </h3>
+                        <div class="client-grid">
+                            <div>
+                                <label class="block text-slate-600">Nom</label>
+                                <input type="text" data-save="client_nom" placeholder="DUPONT" class="uppercase">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Prénom</label>
+                                <input type="text" data-save="client_prenom" placeholder="Jean">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-slate-600">Adresse</label>
+                                <input type="text" data-save="client_adresse" placeholder="Adresse complète...">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Téléphone</label>
+                                <input type="tel" data-save="client_tel" placeholder="06 00 00 00 00">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">E-Mail</label>
+                                <input type="email" data-save="client_email" placeholder="client@email.fr">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Identification -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card">
+                        <h3 class="font-bold text-slate-800 uppercase tracking-wider flex items-center border-b border-slate-200 section-title" style="gap: 6px; margin-top: 0;">
+                            <svg class="icon text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                            Identification Véhicule
+                        </h3>
+                        <div class="vehicle-grid">
+                            <div>
+                                <label class="block text-slate-600">Marque</label>
+                                <input type="text" data-save="veh_marque" placeholder="Volkswagen">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Modèle</label>
+                                <input type="text" data-save="veh_modele" placeholder="Golf 7">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Version</label>
+                                <input type="text" data-save="veh_version" placeholder="2.0 TDI 150">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Immatriculation</label>
+                                <input type="text" data-save="veh_immat" placeholder="AA-123-BB" class="uppercase font-semibold">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">Km</label>
+                                <input type="number" data-save="veh_km" placeholder="125000">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600">1ère Immat.</label>
+                                <input type="date" data-save="veh_date_immat">
+                            </div>
+                            <div class="col-span-3">
+                                <label class="block text-slate-600">Numéro VIN (Série)</label>
+                                <input type="text" data-save="veh_vin" placeholder="WVWZZZ..." class="font-mono uppercase">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉTAT & CANVAS CARROSSERIE 4 VUES -->
+                <div class="border border-slate-300 rounded-lg bg-white section-card">
+                    <div class="flex flex-wrap justify-between items-center border-b border-slate-200 section-title" style="gap: 6px;">
+                        <h3 class="font-bold text-slate-800 uppercase tracking-wider flex items-center" style="gap: 6px; margin: 0;">
+                            <svg class="icon text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>
+                            État Réception & Inspection Carrosserie (4 Vues)
+                        </h3>
+                        <span class="bg-amber-100 text-amber-800 font-medium rounded border border-amber-300 housse-badge">
+                            Penser aux housses de protection
+                        </span>
+                    </div>
+
+                    <div class="inspection-grid">
+                        
+                        <!-- Left Checklist -->
+                        <div class="inspection-left-col" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Fuel & Interior -->
+                            <div class="bg-slate-50 rounded border border-slate-200 fuel-int-box" style="padding: 8px; display: flex; flex-direction: column; gap: 6px;">
+                                <div>
+                                    <span class="font-semibold block text-slate-700" style="margin-bottom: 3px;">Intérieur :</span>
+                                    <div class="flex flex-wrap" style="gap: 6px;">
+                                        <label class="radio-label"><input type="radio" name="etat_int" value="bon"> Bon</label>
+                                        <label class="radio-label"><input type="radio" name="etat_int" value="moyen"> Moyen</label>
+                                        <label class="radio-label"><input type="radio" name="etat_int" value="mauvais"> Mauvais</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold block text-slate-700" style="margin-bottom: 3px;">Carburant :</span>
+                                    <div class="flex flex-wrap" style="gap: 6px;">
+                                        <label class="radio-label"><input type="radio" name="carb" value="res"> Rés.</label>
+                                        <label class="radio-label"><input type="radio" name="carb" value="1/4"> 1/4</label>
+                                        <label class="radio-label"><input type="radio" name="carb" value="1/2"> 1/2</label>
+                                        <label class="radio-label"><input type="radio" name="carb" value="plein"> Plein</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tires Table -->
+                            <div>
+                                <span class="font-semibold text-slate-700 block" style="margin-bottom: 4px;">Pneumatiques :</span>
+                                <table class="tires-table text-center bg-white">
+                                    <tr class="bg-slate-100 font-semibold">
+                                        <td class="text-left" style="padding-left: 6px;">Pos.</td>
+                                        <td>Bon</td>
+                                        <td>Moy.</td>
+                                        <td>Mauv.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left font-medium" style="padding-left: 6px;">AVD</td>
+                                        <td><input type="radio" name="p_avd" value="bon"></td>
+                                        <td><input type="radio" name="p_avd" value="moyen"></td>
+                                        <td><input type="radio" name="p_avd" value="mauvais"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left font-medium" style="padding-left: 6px;">AVG</td>
+                                        <td><input type="radio" name="p_avg" value="bon"></td>
+                                        <td><input type="radio" name="p_avg" value="moyen"></td>
+                                        <td><input type="radio" name="p_avg" value="mauvais"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left font-medium" style="padding-left: 6px;">ARD</td>
+                                        <td><input type="radio" name="p_ard" value="bon"></td>
+                                        <td><input type="radio" name="p_ard" value="moyen"></td>
+                                        <td><input type="radio" name="p_ard" value="mauvais"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left font-medium" style="padding-left: 6px;">ARG</td>
+                                        <td><input type="radio" name="p_arg" value="bon"></td>
+                                        <td><input type="radio" name="p_arg" value="moyen"></td>
+                                        <td><input type="radio" name="p_arg" value="mauvais"></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Wipers/Lights -->
+                            <div class="wipers-grid bg-slate-50 rounded border border-slate-200">
+                                <div>
+                                    <label class="block font-medium">Essuie-glace AV</label>
+                                    <select data-save="eg_av"><option value="Bon">Bon</option><option value="Moyen">Moyen</option><option value="Mauvais">Mauvais</option></select>
+                                </div>
+                                <div>
+                                    <label class="block font-medium">Essuie-glace AR</label>
+                                    <select data-save="eg_ar"><option value="Bon">Bon</option><option value="Moyen">Moyen</option><option value="Mauvais">Mauvais</option></select>
+                                </div>
+                                <div>
+                                    <label class="block font-medium">Feux AV</label>
+                                    <select data-save="feux_av"><option value="Bon">Bon</option><option value="Moyen">Moyen</option><option value="Mauvais">Mauvais</option></select>
+                                </div>
+                                <div>
+                                    <label class="block font-medium">Feux AR</label>
+                                    <select data-save="feux_ar"><option value="Bon">Bon</option><option value="Moyen">Moyen</option><option value="Mauvais">Mauvais</option></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Column (Right) -->
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <div class="flex flex-wrap justify-between items-center" style="gap: 6px; margin-bottom: 6px;">
+                                    <span class="font-semibold text-slate-700">Schéma Carrosserie :</span>
+                                    <div class="flex flex-wrap items-center no-print" style="gap: 6px;">
+                                        <button type="button" onclick="setTool('scratch')" id="btnToolScratch" class="btn-tool bg-amber-200 text-amber-900 border border-amber-500">O : Rayure</button>
+                                        <button type="button" onclick="setTool('impact')" id="btnToolImpact" class="btn-tool bg-red-100 text-red-800 border border-red-300">X : Choc</button>
+                                        <button type="button" onclick="setTool('draw')" id="btnToolDraw" class="btn-tool bg-slate-100 text-slate-700 border border-slate-300">Libre</button>
+                                        <button type="button" onclick="undoVehicleCanvas()" class="btn-tool bg-slate-200 text-slate-800 border border-slate-300">↩ Annuler</button>
+                                        <button type="button" onclick="clearVehicleCanvas()" class="btn-tool bg-slate-200 text-slate-700 border border-slate-300">Effacer</button>
+                                    </div>
+                                </div>
+
+                                <div class="relative w-full bg-white border border-slate-300 rounded flex items-center justify-center" style="padding: 2px;">
+                                    <canvas id="vehicleCanvas" width="480" height="287" class="w-full" style="height: auto; cursor: crosshair;"></canvas>
+                                </div>
+                                <div class="flex justify-between legend-text text-slate-500" style="margin-top: 3px;">
+                                    <span>Légende : <strong class="text-amber-600">O</strong> = Rayures | <strong class="text-red-600">X</strong> = Chocs</span>
+                                    <span class="no-print">Touchez une vue pour annoter</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 6px;">
+                                <label class="block font-semibold text-slate-700">Remarques Carrosserie / État Général :</label>
+                                <textarea rows="2" id="remarques_carrosserie" data-save="remarques_carrosserie" placeholder="Informations complémentaires sur l'état général..."></textarea>
+                                <div class="print-mirror min-h-1" data-mirror="remarques_carrosserie"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center footer-text text-slate-400 border-t border-slate-200 print-hidden" style="padding-top: 4px;">
+                Ordre de Réparation • Lycée Delambre - Montaigne • Partie 1 / 2 (Réception & État)
+            </div>
+        </div>
+
+        <!-- PAGE BREAK IMPRESSION -->
+        <div class="page-break"></div>
+
+        <!-- ================= PAGE 2 ================= -->
+        <div class="page-2 flex flex-col justify-between" style="padding-top: 4px;">
+            <div>
+                <!-- PAGE 2 HEADER -->
+                <div class="flex justify-between items-center border-b-2 border-slate-800 print-hidden" style="padding-bottom: 6px; margin-bottom: 10px;">
+                    <span class="font-bold text-slate-900 uppercase">Ordre de Réparation • Lycée Delambre - Montaigne</span>
+                    <span class="font-bold text-slate-600">Page 2 / 2</span>
+                </div>
+
+                <!-- SYMPTÔMES & TRAVAUX -->
+                <div class="two-col-grid">
+                    
+                    <!-- Symptômes -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card flex flex-col">
+                        <label class="font-bold text-slate-800 uppercase tracking-wider flex items-center" style="gap: 6px; margin-bottom: 6px;">
+                            <svg class="icon text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            SYMPTÔMES SIGNALÉS PAR LE CLIENT
+                        </label>
+                        <textarea rows="7" id="symptomes_client" data-save="symptomes_client" placeholder="Description détaillée des désordres, bruits ou dysfonctionnements constatés..."></textarea>
+                        <div class="print-mirror min-h-4" style="flex: 1;" data-mirror="symptomes_client"></div>
+                    </div>
+
+                    <!-- Travaux à prévoir -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card flex flex-col">
+                        <label class="font-bold text-slate-800 uppercase tracking-wider flex items-center" style="gap: 6px; margin-bottom: 6px;">
+                            <svg class="icon text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
+                            TRAVAUX À PRÉVOIR / INTERVENTIONS
+                        </label>
+                        <textarea rows="7" id="travaux_prevoir" data-save="travaux_prevoir" placeholder="Liste des interventions, remplacements de pièces et révisions commandés..."></textarea>
+                        <div class="print-mirror min-h-4" style="flex: 1;" data-mirror="travaux_prevoir"></div>
+                    </div>
+                </div>
+
+                <!-- OPTIONS & LEGAL -->
+                <div class="border border-slate-300 rounded-lg bg-slate-50 section-card legal-box">
+                    <div class="flex flex-wrap items-center justify-between border-b border-slate-200 legal-header" style="gap: 8px; padding-bottom: 8px; margin-bottom: 8px;">
+                        <div class="flex flex-wrap items-center" style="gap: 10px;">
+                            <span class="font-bold text-slate-800">Rendre au client les pièces remplacées :</span>
+                            <label class="radio-label font-medium">
+                                <input type="radio" name="pieces_remplacees" value="oui"> OUI
+                            </label>
+                            <label class="radio-label font-medium">
+                                <input type="radio" name="pieces_remplacees" value="non" checked> NON
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic legal-text leading-relaxed" style="margin: 0;">
+                        * Le client autorise l'établissement à effectuer les travaux demandés ainsi que les essais sur route nécessaires. Les travaux sur la mécanique et les organes de sécurité sont réalisés sous réserve d'expertise approfondie lors du démontage.
+                    </p>
+                </div>
+
+                <!-- SIGNATURES SECTION -->
+                <div class="two-col-grid">
+                    
+                    <!-- Client Signature -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card">
+                        <div class="flex justify-between items-center" style="margin-bottom: 6px;">
+                            <span class="font-bold text-slate-800 uppercase">Date et Signature du Client :</span>
+                            <button type="button" onclick="clearSignature('canvasClient')" class="btn-tool bg-slate-200 text-slate-700 no-print" style="min-height: 32px; padding: 4px 10px; font-size: 12px;">Effacer</button>
+                        </div>
+                        <div class="border border-slate-300 rounded bg-white relative">
+                            <canvas id="canvasClient" width="380" height="110" class="sig-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Receptionist Signature -->
+                    <div class="border border-slate-300 rounded-lg bg-slate-50 section-card">
+                        <div class="flex justify-between items-center" style="margin-bottom: 6px;">
+                            <span class="font-bold text-slate-800 uppercase">Signature du Réceptionnaire :</span>
+                            <button type="button" onclick="clearSignature('canvasRecep')" class="btn-tool bg-slate-200 text-slate-700 no-print" style="min-height: 32px; padding: 4px 10px; font-size: 12px;">Effacer</button>
+                        </div>
+                        <div class="border border-slate-300 rounded bg-white relative">
+                            <canvas id="canvasRecep" width="380" height="110" class="sig-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER BRANDING -->
+            <div class="border-t border-slate-300 text-center footer-text text-slate-500 flex justify-between items-center" style="padding-top: 6px;">
+                <span>Lycée Delambre - Montaigne • Amiens</span>
+                <span>Fiche d'Ordre de Réparation Atelier Automobile</span>
+                <span>Ordre de Réparation</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT SECTION -->
+    <script>
+        const STORAGE_KEY = 'or_delambre_montaigne_v3_apk';
+        let currentTool = 'scratch';
+        const vCanvas = document.getElementById('vehicleCanvas');
+        const vCtx = vCanvas.getContext('2d');
+        let isDrawingVehicle = false;
+        let vehicleMarks = []; // Stocke les annotations séparément du fond
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setDefaultDates();
+            drawVehicleBase();
+            initVehicleCanvas();
+            initSignatureCanvas('canvasClient');
+            initSignatureCanvas('canvasRecep');
+            restoreFormData();
+            redrawVehicleAll();
+            syncPrintMirrors();
+            bindAutoSave();
+        });
+
+        function setDefaultDates() {
+            const now = new Date();
+            const tzOffset = now.getTimezoneOffset() * 60000;
+            const nowLocal = new Date(now - tzOffset).toISOString().slice(0, 16);
+            document.getElementById('dateReception').value = nowLocal;
+            
+            const tomorrow = new Date(now.getTime() + (24 * 60 * 60 * 1000) - tzOffset);
+            document.getElementById('dateLivraison').value = tomorrow.toISOString().slice(0, 16);
+        }
+
+        function setTool(tool) {
+            currentTool = tool;
+            document.getElementById('btnToolScratch').className = tool === 'scratch'
+                ? 'btn-tool bg-amber-200 text-amber-900 border border-amber-500'
+                : 'btn-tool bg-amber-100 text-amber-800 border border-amber-400';
+            document.getElementById('btnToolImpact').className = tool === 'impact'
+                ? 'btn-tool bg-red-200 text-red-900 border border-red-500'
+                : 'btn-tool bg-red-100 text-red-800 border border-red-300';
+            document.getElementById('btnToolDraw').className = tool === 'draw'
+                ? 'btn-tool bg-slate-200 text-slate-900 border border-slate-800'
+                : 'btn-tool bg-slate-100 text-slate-700 border border-slate-300';
+        }
+
+        /* === DESSIN HAUTE DÉFINITION DES 4 VUES DU VÉHICULE (100% AUTONOME) === */
+        function drawVehicleBase() {
+            const w = vCanvas.width;
+            const h = vCanvas.height;
+            vCtx.save();
+            vCtx.fillStyle = '#ffffff';
+            vCtx.fillRect(0, 0, w, h);
+
+            // Grille de séparation des 4 cadrans
+            vCtx.strokeStyle = '#e2e8f0';
+            vCtx.lineWidth = 1;
+            vCtx.beginPath();
+            vCtx.moveTo(w / 2, 4);
+            vCtx.lineTo(w / 2, h - 4);
+            vCtx.moveTo(4, h / 2);
+            vCtx.lineTo(w - 4, h / 2);
+            vCtx.stroke();
+
+            // Titres des 4 vues
+            vCtx.fillStyle = '#475569';
+            vCtx.font = 'bold 10px sans-serif';
+            vCtx.textAlign = 'center';
+            vCtx.fillText('CÔTÉ GAUCHE', w * 0.25, 14);
+            vCtx.fillText('CÔTÉ DROIT', w * 0.75, 14);
+            vCtx.fillText('FACE AVANT', w * 0.25, h * 0.5 + 14);
+            vCtx.fillText('FACE ARRIÈRE', w * 0.75, h * 0.5 + 14);
+
+            // 1. CÔTÉ GAUCHE (Haut Gauche - Avant vers la gauche)
+            drawSideProfile(vCtx, w * 0.25, h * 0.27, 1.0, false);
+
+            // 2. CÔTÉ DROIT (Haut Droite - Avant vers la droite)
+            drawSideProfile(vCtx, w * 0.75, h * 0.27, 1.0, true);
+
+            // 3. FACE AVANT (Bas Gauche)
+            drawFrontView(vCtx, w * 0.25, h * 0.77);
+
+            // 4. FACE ARRIÈRE (Bas Droite)
+            drawRearView(vCtx, w * 0.75, h * 0.77);
+
+            vCtx.restore();
+        }
+
+        function drawSideProfile(ctx, cx, cy, scale, flipX) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            if (flipX) ctx.scale(-1, 1);
+
+            ctx.strokeStyle = '#1e293b';
+            ctx.fillStyle = '#f8fafc';
+            ctx.lineWidth = 1.6;
+            ctx.lineJoin = 'round';
+
+            // Carrosserie profil (avant à gauche)
+            ctx.beginPath();
+            ctx.moveTo(-98, 22);
+            ctx.lineTo(-102, 12);
+            ctx.quadraticCurveTo(-102, 2, -90, 0);
+            ctx.lineTo(-56, -4);
+            ctx.lineTo(-24, -26);
+            ctx.lineTo(44, -26);
+            ctx.lineTo(84, -4);
+            ctx.quadraticCurveTo(98, -2, 100, 10);
+            ctx.lineTo(98, 22);
+            ctx.lineTo(76, 22);
+            ctx.arc(58, 22, 18, 0, Math.PI, true);
+            ctx.lineTo(-40, 22);
+            ctx.arc(-58, 22, 18, 0, Math.PI, true);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Vitres latérales
+            ctx.fillStyle = '#e2e8f0';
+            ctx.lineWidth = 1.2;
+            // Vitre AV
+            ctx.beginPath();
+            ctx.moveTo(-48, -4);
+            ctx.lineTo(-22, -22);
+            ctx.lineTo(6, -22);
+            ctx.lineTo(6, -4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Vitre AR
+            ctx.beginPath();
+            ctx.moveTo(11, -22);
+            ctx.lineTo(41, -22);
+            ctx.lineTo(66, -4);
+            ctx.lineTo(11, -4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Portières & poignées
+            ctx.beginPath();
+            ctx.moveTo(-36, -4);
+            ctx.lineTo(-36, 18);
+            ctx.moveTo(8, -22);
+            ctx.lineTo(8, 20);
+            ctx.moveTo(46, -4);
+            ctx.quadraticCurveTo(44, 10, 40, 18);
+            ctx.stroke();
+
+            // Poignées
+            ctx.fillStyle = '#64748b';
+            ctx.fillRect(-4, 1, 7, 2.5);
+            ctx.fillRect(32, 1, 7, 2.5);
+
+            // Rétroviseur
+            ctx.fillStyle = '#cbd5e1';
+            ctx.beginPath();
+            ctx.roundRect(-44, -7, 9, 6, 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Phare AV & Feu AR
+            ctx.fillStyle = '#fef08a';
+            ctx.beginPath();
+            ctx.moveTo(-101, 6);
+            ctx.lineTo(-88, 3);
+            ctx.lineTo(-92, 10);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#fecaca';
+            ctx.beginPath();
+            ctx.moveTo(99, 4);
+            ctx.lineTo(87, 1);
+            ctx.lineTo(91, 9);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Roues AV et AR
+            [-58, 58].forEach(wx => {
+                ctx.fillStyle = '#334155';
+                ctx.beginPath();
+                ctx.arc(wx, 22, 14.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#f1f5f9';
+                ctx.beginPath();
+                ctx.arc(wx, 22, 8.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = '#64748b';
+                ctx.beginPath();
+                ctx.arc(wx, 22, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.restore();
+        }
+
+        function drawFrontView(ctx, cx, cy) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1.6;
+            ctx.lineJoin = 'round';
+
+            // Pneus bas
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(-54, 18, 14, 14);
+            ctx.fillRect(40, 18, 14, 14);
+
+            // Rétroviseurs
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.roundRect(-66, -12, 13, 8, 3);
+            ctx.roundRect(53, -12, 13, 8, 3);
+            ctx.fill();
+            ctx.stroke();
+
+            // Toit & habitacle
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.moveTo(-44, -8);
+            ctx.lineTo(-34, -32);
+            ctx.lineTo(34, -32);
+            ctx.lineTo(44, -8);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Pare-brise
+            ctx.fillStyle = '#e2e8f0';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(-38, -10);
+            ctx.lineTo(-30, -28);
+            ctx.lineTo(30, -28);
+            ctx.lineTo(38, -10);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Capot & Bouclier AV
+            ctx.fillStyle = '#f8fafc';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.roundRect(-55, -8, 110, 32, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            // Lignes de capot
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(-34, -8);
+            ctx.lineTo(-26, 4);
+            ctx.moveTo(34, -8);
+            ctx.lineTo(26, 4);
+            ctx.stroke();
+
+            // Phares AV
+            ctx.strokeStyle = '#1e293b';
+            ctx.fillStyle = '#fef08a';
+            ctx.lineWidth = 1.3;
+            ctx.beginPath();
+            ctx.moveTo(-51, 2);
+            ctx.lineTo(-30, 5);
+            ctx.lineTo(-34, 11);
+            ctx.lineTo(-51, 9);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(51, 2);
+            ctx.lineTo(30, 5);
+            ctx.lineTo(34, 11);
+            ctx.lineTo(51, 9);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Calandre & Plaque
+            ctx.fillStyle = '#cbd5e1';
+            ctx.beginPath();
+            ctx.roundRect(-22, 5, 44, 7, 2);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-15, 14, 30, 6);
+            ctx.strokeRect(-15, 14, 30, 6);
+
+            ctx.restore();
+        }
+
+        function drawRearView(ctx, cx, cy) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1.6;
+            ctx.lineJoin = 'round';
+
+            // Pneus bas
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(-54, 18, 14, 14);
+            ctx.fillRect(40, 18, 14, 14);
+
+            // Rétroviseurs
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.roundRect(-66, -12, 13, 8, 3);
+            ctx.roundRect(53, -12, 13, 8, 3);
+            ctx.fill();
+            ctx.stroke();
+
+            // Toit & hayon haut
+            ctx.fillStyle = '#f8fafc';
+            ctx.beginPath();
+            ctx.moveTo(-45, -8);
+            ctx.lineTo(-35, -32);
+            ctx.lineTo(35, -32);
+            ctx.lineTo(45, -8);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Lunette AR
+            ctx.fillStyle = '#e2e8f0';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(-38, -10);
+            ctx.lineTo(-30, -27);
+            ctx.lineTo(30, -27);
+            ctx.lineTo(38, -10);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Essuie-glace AR
+            ctx.beginPath();
+            ctx.moveTo(0, -10);
+            ctx.lineTo(14, -17);
+            ctx.stroke();
+
+            // Coffre & Pare-chocs AR
+            ctx.fillStyle = '#f8fafc';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.roundRect(-55, -8, 110, 32, 6);
+            ctx.fill();
+            ctx.stroke();
+
+            // Feux AR
+            ctx.fillStyle = '#fecaca';
+            ctx.lineWidth = 1.3;
+            ctx.beginPath();
+            ctx.roundRect(-51, -2, 20, 9, 2);
+            ctx.roundRect(31, -2, 20, 9, 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Plaque AR & Ligne pare-chocs
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-16, 4, 32, 7);
+            ctx.strokeRect(-16, 4, 32, 7);
+
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(-53, 15);
+            ctx.lineTo(53, 15);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function redrawVehicleAll() {
+            drawVehicleBase();
+            vehicleMarks.forEach(mark => {
+                if (mark.type === 'scratch') {
+                    vCtx.font = 'bold 18px sans-serif';
+                    vCtx.fillStyle = '#d97706';
+                    vCtx.fillText('O', mark.x - 7, mark.y + 6);
+                } else if (mark.type === 'impact') {
+                    vCtx.font = 'bold 18px sans-serif';
+                    vCtx.fillStyle = '#dc2626';
+                    vCtx.fillText('X', mark.x - 6, mark.y + 6);
+                } else if (mark.type === 'draw' && mark.points && mark.points.length > 0) {
+                    vCtx.beginPath();
+                    vCtx.strokeStyle = '#2563eb';
+                    vCtx.lineWidth = 2.5;
+                    vCtx.lineCap = 'round';
+                    vCtx.moveTo(mark.points[0].x, mark.points[0].y);
+                    for (let i = 1; i < mark.points.length; i++) {
+                        vCtx.lineTo(mark.points[i].x, mark.points[i].y);
+                    }
+                    vCtx.stroke();
+                }
+            });
+        }
+
+        function undoVehicleCanvas() {
+            if (vehicleMarks.length === 0) return;
+            vehicleMarks.pop();
+            redrawVehicleAll();
+            saveFormData();
+        }
+
+        function initVehicleCanvas() {
+            let currentStroke = null;
+            const getPos = (e) => {
+                const rect = vCanvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (vCanvas.width / rect.width),
+                    y: (clientY - rect.top) * (vCanvas.height / rect.height)
+                };
+            };
+
+            const handlePointerDown = (e) => {
+                const pos = getPos(e);
+                if (currentTool === 'scratch') {
+                    vehicleMarks.push({ type: 'scratch', x: pos.x, y: pos.y });
+                    redrawVehicleAll();
+                    saveFormData();
+                } else if (currentTool === 'impact') {
+                    vehicleMarks.push({ type: 'impact', x: pos.x, y: pos.y });
+                    redrawVehicleAll();
+                    saveFormData();
+                } else if (currentTool === 'draw') {
+                    isDrawingVehicle = true;
+                    currentStroke = { type: 'draw', points: [pos] };
+                    vehicleMarks.push(currentStroke);
+                    vCtx.beginPath();
+                    vCtx.moveTo(pos.x, pos.y);
+                    vCtx.strokeStyle = '#2563eb';
+                    vCtx.lineWidth = 2.5;
+                    vCtx.lineCap = 'round';
+                }
+            };
+
+            const handlePointerMove = (e) => {
+                if (!isDrawingVehicle || currentTool !== 'draw' || !currentStroke) return;
+                const pos = getPos(e);
+                currentStroke.points.push(pos);
+                vCtx.lineTo(pos.x, pos.y);
+                vCtx.stroke();
+            };
+
+            const handlePointerUp = () => {
+                if (isDrawingVehicle) {
+                    isDrawingVehicle = false;
+                    currentStroke = null;
+                    saveFormData();
+                }
+            };
+
+            vCanvas.addEventListener('mousedown', handlePointerDown);
+            vCanvas.addEventListener('mousemove', handlePointerMove);
+            vCanvas.addEventListener('mouseup', handlePointerUp);
+
+            vCanvas.addEventListener('touchstart', (e) => { e.preventDefault(); handlePointerDown(e); }, { passive: false });
+            vCanvas.addEventListener('touchmove', (e) => { e.preventDefault(); handlePointerMove(e); }, { passive: false });
+            vCanvas.addEventListener('touchend', handlePointerUp);
+        }
+
+        function clearVehicleCanvas() {
+            vehicleMarks = [];
+            redrawVehicleAll();
+            saveFormData();
+        }
+
+        /* --- SIGNATURE CANVAS LOGIC --- */
+        function initSignatureCanvas(id) {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
+            let isSigning = false;
+
+            const getPos = (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (canvas.width / rect.width),
+                    y: (clientY - rect.top) * (canvas.height / rect.height)
+                };
+            };
+
+            const startSign = (e) => {
+                isSigning = true;
+                const pos = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.strokeStyle = '#1e3a8a';
+                ctx.lineWidth = 2.2;
+                ctx.lineCap = 'round';
+            };
+
+            const moveSign = (e) => {
+                if (!isSigning) return;
+                const pos = getPos(e);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            };
+
+            const stopSign = () => {
+                if (isSigning) {
+                    isSigning = false;
+                    saveFormData();
+                }
+            };
+
+            canvas.addEventListener('mousedown', startSign);
+            canvas.addEventListener('mousemove', moveSign);
+            canvas.addEventListener('mouseup', stopSign);
+            canvas.addEventListener('mouseleave', stopSign);
+
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startSign(e); }, { passive: false });
+            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); moveSign(e); }, { passive: false });
+            canvas.addEventListener('touchend', stopSign);
+        }
+
+        function clearSignature(id) {
+            const canvas = document.getElementById(id);
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            saveFormData();
+        }
+
+        /* --- SYNCHRONISATION DES BLOCS MIROIRS POUR L'IMPRESSION PDF --- */
+        function syncPrintMirrors() {
+            document.querySelectorAll('[data-mirror]').forEach(mirror => {
+                const key = mirror.getAttribute('data-mirror');
+                const ta = document.querySelector(`textarea[data-save="${key}"]`);
+                if (ta) {
+                    mirror.textContent = ta.value || ' ';
+                }
+            });
+        }
+
+        /* --- SAUVEGARDE AUTOMATIQUE & EXPORT JSON (POUR APK) --- */
+        function collectFormData() {
+            const data = { fields: {}, radios: {}, vehicleMarks: vehicleMarks };
+            document.querySelectorAll('[data-save]').forEach(el => {
+                data.fields[el.getAttribute('data-save')] = el.value;
+            });
+            document.querySelectorAll('input[type="radio"]:checked').forEach(r => {
+                data.radios[r.name] = r.value;
+            });
+            try {
+                data.canvasClient = document.getElementById('canvasClient').toDataURL('image/png');
+                data.canvasRecep = document.getElementById('canvasRecep').toDataURL('image/png');
+            } catch (e) {}
+            return data;
+        }
+
+        function saveFormData() {
+            syncPrintMirrors();
+            try {
+                const data = collectFormData();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                const ind = document.getElementById('saveIndicator');
+                if (ind) {
+                    ind.textContent = 'Sauvegardé ✓';
+                    setTimeout(() => { ind.textContent = 'Sauvegarde auto active'; }, 1500);
+                }
+            } catch (e) {}
+        }
+
+        function loadStorageData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function applyFormData(data) {
+            if (!data) return;
+            if (data.fields) {
+                Object.entries(data.fields).forEach(([key, val]) => {
+                    const el = document.querySelector(`[data-save="${key}"]`);
+                    if (el && val !== undefined) el.value = val;
+                });
+            }
+            if (data.radios) {
+                Object.entries(data.radios).forEach(([name, val]) => {
+                    const radio = document.querySelector(`input[type="radio"][name="${name}"][value="${val}"]`);
+                    if (radio) radio.checked = true;
+                });
+            }
+            vehicleMarks = Array.isArray(data.vehicleMarks) ? data.vehicleMarks : [];
+            redrawVehicleAll();
+
+            ['canvasClient', 'canvasRecep'].forEach(cid => {
+                if (data[cid]) {
+                    const c = document.getElementById(cid);
+                    const ctx = c.getContext('2d');
+                    const img = new Image();
+                    img.onload = () => {
+                        ctx.clearRect(0, 0, c.width, c.height);
+                        ctx.drawImage(img, 0, 0, c.width, c.height);
+                    };
+                    img.src = data[cid];
+                }
+            });
+            syncPrintMirrors();
+        }
+
+        function restoreFormData() {
+            const saved = loadStorageData();
+            if (saved) applyFormData(saved);
+        }
+
+        function bindAutoSave() {
+            document.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.id === 'importJsonInput') return;
+                el.addEventListener('input', saveFormData);
+                el.addEventListener('change', saveFormData);
+            });
+        }
+
+        function exportJSON() {
+            const data = collectFormData();
+            const immat = (data.fields.veh_immat || 'SANS_IMMAT').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+            const nom = (data.fields.client_nom || 'CLIENT').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+            const filename = `OR_${immat}_${nom}.json`;
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function importJSON(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    applyFormData(data);
+                    saveFormData();
+                } catch (err) {
+                    alert("Fichier OR invalide.");
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function exportWord() {
+            redrawVehicleAll();
+            saveFormData();
+
+            const getVal = (key) => {
+                const el = document.querySelector(`[data-save="${key}"]`);
+                return el ? el.value : '';
+            };
+            const getRadio = (name, map = {}) => {
+                const r = document.querySelector(`input[type="radio"][name="${name}"]:checked`);
+                if (!r) return 'Non renseigné';
+                return map[r.value] || r.value;
+            };
+            const esc = (str) => String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+            const fmtDate = (val) => {
+                if (!val) return '';
+                return val.replace('T', ' à ');
+            };
+
+            const vehicleB64 = vCanvas.toDataURL('image/png').split(',')[1];
+            const clientSigB64 = document.getElementById('canvasClient').toDataURL('image/png').split(',')[1];
+            const recepSigB64 = document.getElementById('canvasRecep').toDataURL('image/png').split(',')[1];
+
+            const etatMap = { bon: 'Bon', moyen: 'Moyen', mauvais: 'Mauvais' };
+            const carbMap = { res: 'Réserve', '1/4': '1/4', '1/2': '1/2', plein: 'Plein' };
+
+            const htmlBody = `<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Ordre de Réparation</title>
+<!--[if gte mso 9]>
+<xml>
+  <w:WordDocument>
+    <w:View>Print</w:View>
+    <w:Zoom>100</w:Zoom>
+    <w:DoNotOptimizeForBrowser/>
+  </w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+  @page Section1 {
+    size: 210mm 297mm;
+    margin: 7mm 8mm 7mm 8mm;
+    mso-header-margin: 3mm;
+    mso-footer-margin: 3mm;
+  }
+  div.Section1 { page: Section1; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; color: #0f172a; margin: 0; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 5pt; }
+  td, th { border: 1px solid #94a3b8; padding: 3pt 5pt; vertical-align: top; }
+  .no-border td { border: none; }
+  .header-table td { border: 1px solid #1e293b; vertical-align: middle; }
+  .sec-title { background-color: #e2e8f0; font-weight: bold; font-size: 8.5pt; text-transform: uppercase; color: #0f172a; padding: 2.5pt 5pt; }
+  .lbl { font-weight: bold; color: #334155; font-size: 8pt; }
+  .box-text { height: 42pt; }
+  .small { font-size: 7.5pt; color: #475569; }
+</style>
+</head>
+<body>
+<div class="Section1">
+  <table class="header-table">
+    <tr>
+      <td style="width: 34%; font-size: 8pt;">
+        <strong style="color:#1e3a8a; font-size:9pt;">LYCÉE DELAMBRE - MONTAIGNE</strong><br>
+        Lycées professionnels publics<br>
+        3 rue Montaigne, 80080 AMIENS<br>
+        Tél : 03 22 66 30 60<br>
+        <span style="font-family:monospace;">SIRET : 19801700600018</span>
+      </td>
+      <td style="width: 36%; text-align: center; background-color: #f8fafc;">
+        <strong style="font-size: 13pt; letter-spacing: 1px;">ORDRE DE RÉPARATION</strong><br>
+        <span style="font-size: 8pt; color: #475569; font-weight: bold;">ATELIER MAINTENANCE VÉHICULES</span>
+      </td>
+      <td style="width: 30%; font-size: 8pt; background-color: #f8fafc;">
+        <span class="lbl">Réception :</span> ${esc(fmtDate(getVal('dateReception')))}<br><br>
+        <span class="lbl">Livraison prévue :</span> ${esc(fmtDate(getVal('dateLivraison')))}
+      </td>
+    </tr>
+  </table>
+
+  <table class="no-border" style="margin-bottom: 0;">
+    <tr>
+      <td style="width: 49%; padding: 0 3pt 0 0;">
+        <table>
+          <tr><td colspan="2" class="sec-title">Client</td></tr>
+          <tr><td style="width:50%;"><span class="lbl">Nom :</span> ${esc(getVal('client_nom').toUpperCase())}</td><td style="width:50%;"><span class="lbl">Prénom :</span> ${esc(getVal('client_prenom'))}</td></tr>
+          <tr><td colspan="2"><span class="lbl">Adresse :</span> ${esc(getVal('client_adresse'))}</td></tr>
+          <tr><td><span class="lbl">Tél :</span> ${esc(getVal('client_tel'))}</td><td><span class="lbl">E-mail :</span> ${esc(getVal('client_email'))}</td></tr>
+        </table>
+      </td>
+      <td style="width: 51%; padding: 0 0 0 3pt;">
+        <table>
+          <tr><td colspan="3" class="sec-title">Identification Véhicule</td></tr>
+          <tr><td style="width:34%;"><span class="lbl">Marque :</span> ${esc(getVal('veh_marque'))}</td><td style="width:33%;"><span class="lbl">Modèle :</span> ${esc(getVal('veh_modele'))}</td><td style="width:33%;"><span class="lbl">Version :</span> ${esc(getVal('veh_version'))}</td></tr>
+          <tr><td><span class="lbl">Immat. :</span> <strong>${esc(getVal('veh_immat').toUpperCase())}</strong></td><td><span class="lbl">Km :</span> ${esc(getVal('veh_km'))}</td><td><span class="lbl">1ère Immat. :</span> ${esc(getVal('veh_date_immat'))}</td></tr>
+          <tr><td colspan="3"><span class="lbl">VIN :</span> <span style="font-family:monospace;">${esc(getVal('veh_vin').toUpperCase())}</span></td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td colspan="2" class="sec-title">État Réception &amp; Inspection Carrosserie (4 Vues) — <em>Penser aux housses de protection</em></td>
+    </tr>
+    <tr>
+      <td style="width: 35%; padding: 4pt;">
+        <div style="margin-bottom: 4pt;">
+          <span class="lbl">Intérieur :</span> ${esc(getRadio('etat_int', etatMap))}<br>
+          <span class="lbl">Carburant :</span> ${esc(getRadio('carb', carbMap))}
+        </div>
+        <table style="margin-bottom: 4pt; font-size: 8pt; text-align: center;">
+          <tr style="background:#f1f5f9; font-weight:bold;"><td style="text-align:left;">Pneus</td><td>État</td></tr>
+          <tr><td style="text-align:left;">AVD</td><td>${esc(getRadio('p_avd', etatMap))}</td></tr>
+          <tr><td style="text-align:left;">AVG</td><td>${esc(getRadio('p_avg', etatMap))}</td></tr>
+          <tr><td style="text-align:left;">ARD</td><td>${esc(getRadio('p_ard', etatMap))}</td></tr>
+          <tr><td style="text-align:left;">ARG</td><td>${esc(getRadio('p_arg', etatMap))}</td></tr>
+        </table>
+        <table style="margin-bottom: 0; font-size: 8pt;">
+          <tr><td><span class="lbl">EG AV :</span> ${esc(getVal('eg_av'))}</td><td><span class="lbl">EG AR :</span> ${esc(getVal('eg_ar'))}</td></tr>
+          <tr><td><span class="lbl">Feux AV :</span> ${esc(getVal('feux_av'))}</td><td><span class="lbl">Feux AR :</span> ${esc(getVal('feux_ar'))}</td></tr>
+        </table>
+      </td>
+      <td style="width: 65%; text-align: center; padding: 4pt;">
+        <img src="http://localhost/or_files/vehicule.png" width="290" height="173" style="width:290px; height:173px; display:block; margin: 0 auto;"><br>
+        <div class="small" style="text-align:left;"><strong>Légende :</strong> O = Rayures | X = Chocs</div>
+        <div style="text-align:left; margin-top:3pt; border-top:1px solid #cbd5e1; padding-top:2pt;">
+          <span class="lbl">Remarques Carrosserie :</span> ${esc(getVal('remarques_carrosserie'))}
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td class="sec-title" style="width:50%;">Symptômes signalés par le client</td>
+      <td class="sec-title" style="width:50%;">Travaux à prévoir / Interventions</td>
+    </tr>
+    <tr>
+      <td class="box-text">${esc(getVal('symptomes_client'))}</td>
+      <td class="box-text">${esc(getVal('travaux_prevoir'))}</td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td style="background:#f8fafc;">
+        <span class="lbl">Rendre au client les pièces remplacées :</span> <strong>${esc(getRadio('pieces_remplacees', { oui: 'OUI', non: 'NON' }))}</strong><br>
+        <span class="small"><em>* Le client autorise l'établissement à effectuer les travaux demandés ainsi que les essais sur route nécessaires. Les travaux sur la mécanique et les organes de sécurité sont réalisés sous réserve d'expertise approfondie lors du démontage.</em></span>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td class="sec-title" style="width:50%;">Date et Signature du Client :</td>
+      <td class="sec-title" style="width:50%;">Signature du Réceptionnaire :</td>
+    </tr>
+    <tr>
+      <td style="height: 48pt; text-align: center; vertical-align: middle;">
+        <img src="http://localhost/or_files/sig_client.png" width="175" height="50" style="width:175px; height:50px;">
+      </td>
+      <td style="height: 48pt; text-align: center; vertical-align: middle;">
+        <img src="http://localhost/or_files/sig_recep.png" width="175" height="50" style="width:175px; height:50px;">
+      </td>
+    </tr>
+  </table>
+
+  <div class="small" style="text-align:center; border-top:1px solid #cbd5e1; padding-top:2pt;">
+    Lycée Delambre - Montaigne • Amiens — Fiche d'Ordre de Réparation Atelier Automobile
+  </div>
+</div>
+</body>
+</html>`;
+
+            const wrapBase64 = (b64) => b64.match(/.{1,76}/g).join('\r\n');
+            const boundary = '----=_NextPart_OR_DELAMBRE_001';
+
+            const mhtml = [
+                'MIME-Version: 1.0',
+                `Content-Type: multipart/related; boundary="${boundary}"`,
+                '',
+                `--${boundary}`,
+                'Content-Type: text/html; charset="utf-8"',
+                'Content-Transfer-Encoding: 8bit',
+                '',
+                htmlBody,
+                '',
+                `--${boundary}`,
+                'Content-Location: http://localhost/or_files/vehicule.png',
+                'Content-Transfer-Encoding: base64',
+                'Content-Type: image/png',
+                '',
+                wrapBase64(vehicleB64),
+                '',
+                `--${boundary}`,
+                'Content-Location: http://localhost/or_files/sig_client.png',
+                'Content-Transfer-Encoding: base64',
+                'Content-Type: image/png',
+                '',
+                wrapBase64(clientSigB64),
+                '',
+                `--${boundary}`,
+                'Content-Location: http://localhost/or_files/sig_recep.png',
+                'Content-Transfer-Encoding: base64',
+                'Content-Type: image/png',
+                '',
+                wrapBase64(recepSigB64),
+                '',
+                `--${boundary}--`
+            ].join('\r\n');
+
+            const immat = (getVal('veh_immat') || 'SANS_IMMAT').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+            const nom = (getVal('client_nom') || 'CLIENT').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+            const filename = `OR_${immat}_${nom}.doc`;
+
+            const blob = new Blob(['\ufeff', mhtml], { type: 'application/msword;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function triggerPrintPDF() {
+            redrawVehicleAll();
+            syncPrintMirrors();
+            saveFormData();
+            try {
+                window.print();
+            } catch (e) {
+                alert("Utilisez 'Sauver OR' ou le menu Partager/Imprimer de votre appareil pour exporter le PDF.");
+            }
+        }
+
+        window.addEventListener('beforeprint', () => {
+            redrawVehicleAll();
+            syncPrintMirrors();
+        });
+
+        /* --- FORM RESET LOGIC --- */
+        function clearAllFields() {
+            if (confirm("Voulez-vous démarrer un nouvel Ordre de Réparation et effacer la saisie actuelle ?")) {
+                document.querySelectorAll('input, textarea, select').forEach(input => {
+                    if (input.id === 'importJsonInput') return;
+                    if (input.type === 'radio') {
+                        input.checked = (input.name === 'pieces_remplacees' && input.value === 'non');
+                    } else if (input.tagName === 'SELECT') {
+                        input.selectedIndex = 0;
+                    } else if (input.type !== 'datetime-local') {
+                        input.value = '';
+                    }
+                });
+                setDefaultDates();
+                clearVehicleCanvas();
+                clearSignature('canvasClient');
+                clearSignature('canvasRecep');
+                syncPrintMirrors();
+                localStorage.removeItem(STORAGE_KEY);
+            }
+        }
+    </script>
+</body>
+</html>
